@@ -140,7 +140,7 @@ function App() {
                     
                     {enemy.hornetDescription !== '...' &&
                       <div>
-                        <img src="./src/assets/hd.png" className="mx-auto block w-auto mb-7" />
+                        <img className="mx-auto block w-auto mb-7 content-[url(./assets/hd.png)]" />
                         <span className='block max-w-[85%] mx-auto text-2xl text-white/60'>{enemy.hornetDescription}</span>
                       </div>
                     }
