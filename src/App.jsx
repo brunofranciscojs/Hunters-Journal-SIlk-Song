@@ -67,16 +67,21 @@ function App() {
   }
 
   const scrollPagination = (d) => {
-    if (divRef.current) {
-      const currentScroll = divRef.current.scrollTop;
-      const step = 200;
+    if (!divRef.current) return;
 
-      divRef.current.scrollTo({
-        top: d === "<" ? currentScroll - step : currentScroll + step,
-        behavior: "smooth",
-      });
-    }
+    const isMobile = window.innerWidth < 1024;
+    const step = 200;
+
+    const currentScroll = isMobile
+      ? divRef.current.scrollLeft
+      : divRef.current.scrollTop;
+
+    divRef.current.scrollTo({
+      [isMobile ? 'left' : 'top']: d === "<" ? currentScroll - step : currentScroll + step,
+      behavior: "smooth",
+    });
   };
+
 
  if (loading) {
     return (
@@ -99,25 +104,27 @@ function App() {
   return (
     <>
 
-      <main className='flex gap-8 w-full lg:px-12 px-4 h-full items-center justify-center lg:flex-row flex-col relative'>
-        <section className='flex flex-col justify-center items-center gap-5 lg:pt-20 pt-10'>
+      <main className='flex gap-8 w-full lg:px-12 px-2 h-full items-center justify-center lg:flex-row flex-col relative'>
+        <section className='flex lg:flex-col flex-row justify-center items-center gap-5 lg:pt-20 pt-10'>
 
-          <Arrow className={'mx-auto block cursor-pointer z-50 relative'} onClick={() =>scrollPagination('<')}/>
+          <Arrow className={'mx-auto block cursor-pointer z-50 lg:relative absolute left-0 lg:rotate-0 -rotate-90 scale-50 lg:scale-100'} onClick={() =>scrollPagination('<')}/>
           
           <div className='relative z-10 w-full after:content-[""] after:absolute after:right-0 after:top-0 after:h-full after:w-px after:bg-[linear-gradient(to_bottom,#5550,#555,#555,#5550)]'>
             <div className='h-20 bg-[linear-gradient(to_bottom,#222_10%,transparent_100%)] absolute top-0 left-0 w-full z-10 pointer-events-none opacity-60 lg:opacity-100'></div>
-            <ul className="py-12 w-full h-full overflow-y-auto lg:max-h-[590px] max-h-80 flex px-10 flex-wrap relative mx-auto justify-center items-center gap-y-10 z-0 [&::-webkit-scrollbar]:w-0" ref={divRef}>
+            
+            <ul className="mask-[linear-gradient(to_left,#0000,#000,#000,#0000)] lg:overflow-x-hidden overflow-x-auto! py-12 grid lg:w-full grid-rows-2 grid-flow-col auto-cols-[100px] w-max max-w-full lg:h-full flex-row lg:overflow-y-auto overflow-y-hidden lg:max-h-[590px] max-h-[300px] whitespace-normal lg:flex px-10 flex-wrap relative mx-auto justify-center items-center gap-y-10 z-0 [&::-webkit-scrollbar]:w-0" ref={divRef}>
               {enemies.slice(1).map((enemy, key) => (
-                <li key={key} className={`lg:w-1/3 w-2/12 relative cursor-pointer hover:brightness-150 hover:saturate-150 hover:opacity-100 transition-all opacity-90`} title={enemy.name} data-active={active === enemy.slug} onClick={(e) => ativar(enemy.slug,e.target)}>
+                <li key={key} className={`lg:w-1/3 w-[2/12] min-w-[110px] lg:min-w-[unset] relative cursor-pointer hover:brightness-150 hover:saturate-150 hover:opacity-100 transition-all opacity-90`} title={enemy.name} data-active={active === enemy.slug} onClick={(e) => ativar(enemy.slug,e.target)}>
                   <img  src={enemy.image} className='rounded-full w-20 h-20 border-3 border-white/80 block object-cover mx-auto transition-all duration-200' />
                 </li>
                 ))
               }
             </ul>
+
             <div className='h-24 bg-[linear-gradient(to_top,#222_10%,transparent_100%)] absolute bottom-0 left-0 w-full z-10 pointer-events-none opacity-60 lg:opacity-100'></div>
           </div>
   
-          <Arrow className={'mx-auto block scale-[1_-1] cursor-pointer z-50'} onClick={() =>scrollPagination('>')}/>
+          <Arrow className={'mx-auto block cursor-pointer z-50 lg:relative absolute right-0 lg:rotate-0 -rotate-90 scale-[.5_-.5] lg:scale-[1_-1]'} onClick={() =>scrollPagination('>')}/>
         </section>
   
         <section className='max-h-120 lg:max-h-[unset] min-h-77 lg:min-h-[unset]'>
@@ -125,13 +132,8 @@ function App() {
               const enemy = enemies.find(e => e.slug === active);
               return (
                 <div className="place-content-center w-full mx-auto relative">
-                  <img src={enemy.image} key={enemy.slug} alt={enemy.name} className={`block mx-auto w-auto relative lg:min-w-120 min-w-44 z-10 brightness-150 saturate-[1.5] object-contain`} />
-                  {enemy && (
-                    <div
-                      className="blur-[5rem] rounded-full absolute z-0 w-[300px] h-[300px] left-1/2 top-1/2 [translate:-50%_-50%] saturate-[2] bg-cover bg-center"
-                      style={{ backgroundImage: `url(${enemy.image})` }}
-                    />
-                  )}
+                  <img src={enemy.image} key={enemy.slug} alt={enemy.name} className={`block mx-auto w-auto relative min-w-120 lg:min-w-66 z-10 brightness-150 saturate-[1.5] object-contain`} />
+                  <div className="blur-[5rem] rounded-full absolute z-0 w-[300px] h-[300px] left-1/2 top-1/2 [translate:-50%_-50%] saturate-[2] bg-cover bg-center bg-[#5554]"/>
                 </div>
               );
             })()}
