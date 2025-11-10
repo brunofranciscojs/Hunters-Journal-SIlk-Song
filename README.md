@@ -2,8 +2,6 @@
 
 Uma aplicação web interativa que replica a estética do jogo Hollow Knight - Silk Song, fornecendo informações detalhadas sobre todos os inimigos do jogo através de uma interface imersiva e fiel ao design original.
 
-![Hollow Knight](https://hollowknight.wiki/images/thumb/b/b2/Knight_Idle.png/200px-Knight_Idle.png)
-
 ## Sobre o Projeto
 
 Este projeto combina uma API customizada de web scraping com uma interface de usuário inspirada na estética sombria e atmosférica de Hollow Knight. A aplicação permite aos jogadores explorar informações detalhadas sobre os inimigos do jogo de forma visualmente atraente e intuitiva.
