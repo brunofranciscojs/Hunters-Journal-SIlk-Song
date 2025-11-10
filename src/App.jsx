@@ -84,7 +84,7 @@ function App() {
           <Arrow className={'mx-auto block cursor-pointer z-50 relative'}/>
           
           <div className='relative z-10 w-full'>
-            <div className='h-20 bg-[linear-gradient(to_bottom,#242424_10%,transparent_100%)] absolute top-0 left-0 w-full z-10 pointer-events-none'></div>
+            <div className='h-20 bg-[linear-gradient(to_bottom,#111_10%,transparent_100%)] absolute top-0 left-0 w-full z-10 pointer-events-none'></div>
             <ul className="w-full h-full overflow-y-auto lg:max-h-[590px] max-h-80 flex px-10 flex-wrap relative mx-auto justify-center items-center gap-y-10 z-0 [&::-webkit-scrollbar]:w-0.5 [&::-webkit-scrollbar-track]:bg-[#555]">
               {enemies.slice(1).map((enemy, key) => (
                 <li key={key} className={`lg:w-1/3 w-2/12 relative cursor-pointer ${active === enemy.slug ? '[anchor-name:--active]' : ''}`} data-active={active === enemy.slug} onClick={() => setActive(enemy.slug)}>
@@ -93,7 +93,7 @@ function App() {
                 ))
               }
             </ul>
-            <div className='h-24 bg-[linear-gradient(to_top,#242424_10%,transparent_100%)] absolute bottom-0 left-0 w-full z-10 pointer-events-none'></div>
+            <div className='h-24 bg-[linear-gradient(to_top,#111_10%,transparent_100%)] absolute bottom-0 left-0 w-full z-10 pointer-events-none'></div>
           </div>
   
           <Arrow className={'mx-auto block scale-[1_-1] cursor-pointer z-50'}/>
@@ -112,7 +112,7 @@ function App() {
                   />
                   {enemy && (
                     <div
-                      className="blur-[5rem] rounded-full absolute z-0 w-[300px] h-[300px] left-1/2 top-1/2 [translate:-50%_-50%] saturate-[2] bg-cover bg-center brightness-150"
+                      className="blur-[5rem] rounded-full absolute z-0 w-[300px] h-[300px] left-1/2 top-1/2 [translate:-50%_-50%] saturate-[2] bg-cover bg-center"
                       style={{ backgroundImage: `url(${enemy.image})` }}
                     />
                   )}

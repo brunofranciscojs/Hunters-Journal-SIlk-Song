@@ -9,7 +9,7 @@
   font-weight: 400;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #111;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -22,7 +22,7 @@
 html{
   @apply lg:overflow-y-hidden
 }
-@media screen and (min-width:1460px){
+@media screen and (max-width:1530px){
   section{
    @apply after:[zoom:.87]
   }
