@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import Arrow from './components/arrowIcon';
 import Loading from './components/Loading';
-const apiURL = import.meta.env.VITE_API_URL
+const apiURL1 = import.meta.env.VITE_API_URL1
+const apiURL2 = import.meta.env.VITE_API_URL2
 
 function App() {
   const [enemies, setEnemies] = useState([])
@@ -24,14 +25,14 @@ function App() {
       setLoading(true);
       console.log("🌐 Buscando da API...");
 
-      const res = await fetch(apiURL);
+      const res = await fetch(apiURL1);
       const data = await res.json();
       const enemiesList = data.data;
 
       const details = await Promise.all(
         enemiesList.map(async (enemy) => {
           const res = await fetch(
-            `${apiURL}/${enemy.slug}`
+            `${apiURL2}/${enemy.slug}`
           );
           const detail = await res.json();
 
