@@ -78,7 +78,7 @@ function App() {
 
   return (
     <>
-      <main className='flex gap-8 w-svw lg:px-12 px-4 h-dvh items-end justify-center lg:flex-row flex-col'>
+      <main className='flex gap-8 w-full lg:px-12 px-4 h-full items-center justify-center lg:flex-row flex-col relative'>
         <section className='flex flex-col justify-center items-center gap-5 lg:pt-20 pt-75'>
 
           <Arrow className={'mx-auto block cursor-pointer z-50 relative'}/>

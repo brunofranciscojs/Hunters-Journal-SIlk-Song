@@ -22,6 +22,11 @@
 html{
   @apply lg:overflow-y-hidden
 }
+@media screen and (min-width:1460px){
+  section{
+   @apply after:[zoom:.87]
+  }
+}
 body{
   @apply place-content-center h-dvh
 }
@@ -34,18 +39,6 @@ section{
     nth-1:after:left-5
     nth-1:after:top-1/2
     nth-1:after:-translate-y-1/2
-  
-    nth-1:before:content-[url(./assets/active.webp)] 
-    nth-1:before:w-32 
-    nth-1:before:h-32 
-    nth-1:before:pointer-events-none 
-    nth-1:before:absolute 
-    nth-1:before:scale-[.8]
-    nth-1:before:transition-all
-    nth-1:before:[position-anchor:--active]
-    nth-1:before:[position-area:center_center]
-    nth-1:before:duration-150
-    nth-1:before:animate-[active_1s_infinite]
 
     lg:nth-3:after:content-[url(./assets/right-ornament.webp)] nth-3:after:content-[''] 
     nth-3:after:absolute
@@ -81,4 +74,18 @@ svg{
   to{
     scale: 1 
   }
+}
+[data-active="true"]{ @apply relative
+    before:content-[url(./assets/active.webp)] 
+    before:w-32 
+    before:h-32 
+    before:pointer-events-none 
+    before:absolute 
+    before:left-1/2 
+    before:top-1/2 
+    before:[translate:-50%_-50%]
+    before:scale-[.8]
+    before:transition-all
+    before:duration-150
+    before:animate-[active_1s_infinite]
 }
