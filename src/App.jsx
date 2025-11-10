@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Arrow from './components/arrowIcon';
 import Loading from './components/Loading';
-const apiURL = import.meta.VITE_API_URL
+const apiURL = import.meta.env.VITE_API_URL
 
 function App() {
   const [enemies, setEnemies] = useState([])
