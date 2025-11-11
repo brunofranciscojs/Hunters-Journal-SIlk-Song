@@ -118,7 +118,7 @@ function App() {
       <main className='flex gap-8 w-full lg:px-12 px-2 h-full items-center justify-center lg:flex-row flex-col relative'>
         <section className='flex lg:flex-col flex-row justify-center items-center gap-5 lg:pt-20 pt-10'>
 
-          <Arrow className={'mx-auto block cursor-pointer z-50 lg:relative absolute -left-10 lg:rotate-0 -rotate-90 scale-50 lg:scale-100'} onClick={() =>scrollPagination('<')}/>
+          <Arrow className={'mx-auto block cursor-pointer z-50 lg:relative absolute lg:top-5 top-[unset] lg:left-0 -left-10 lg:rotate-0 -rotate-90 scale-50 lg:scale-100'} onClick={() =>scrollPagination('<')}/>
           
           <div className='relative z-10 w-full after:content-[""] after:absolute after:right-0 after:top-0 after:h-full after:w-px after:bg-[linear-gradient(to_bottom,#5550,#555,#555,#5550)]'>
             <div className='h-20 bg-[linear-gradient(to_bottom,#222_10%,transparent_100%)] absolute top-0 left-0 w-full z-10 pointer-events-none opacity-60 lg:opacity-100 lg:flex hidden '></div>
@@ -135,7 +135,7 @@ function App() {
             <div className='h-24 bg-[linear-gradient(to_top,#222_10%,transparent_100%)] absolute bottom-0 left-0 w-full z-10 pointer-events-none opacity-60 lg:opacity-100 lg:flex hidden '></div>
           </div>
   
-          <Arrow className={'mx-auto block cursor-pointer z-50 lg:relative absolute -right-10 lg:rotate-0 -rotate-90 scale-[.5_-.5] lg:scale-[1_-1]'} onClick={() =>scrollPagination('>')}/>
+          <Arrow className={'mx-auto block cursor-pointer z-50 lg:relative absolute lg:right-0 lg:bottom-5 bottom-[unset] -right-10 lg:rotate-0 -rotate-90 scale-[.5_-.5] lg:scale-[1_-1]'} onClick={() =>scrollPagination('>')}/>
         </section>
   
         <section className='max-h-120 lg:max-h-[unset] min-h-77 lg:min-h-[unset] relative h-dvh'>
