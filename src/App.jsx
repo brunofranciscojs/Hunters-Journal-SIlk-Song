@@ -1,16 +1,17 @@
 import { useEffect, useState, useRef } from 'react'
 import Arrow from './components/arrowIcon';
 import Loading from './components/Loading';
+import { Analytics } from '@vercel/analytics/react';
+import GitHubIcon from './components/GithubIcon';
 const apiURL1 = import.meta.env.VITE_API_URL1
 const apiURL2 = import.meta.env.VITE_API_URL2
-import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const [enemies, setEnemies] = useState([])
   const [active,setActive] = useState('Lace');
   const [loading, setLoading] = useState(true); 
   const divRef = useRef(null);
-
+  
   useEffect(() => {
     const getEnemies = async () => {
       try {
@@ -32,20 +33,30 @@ function App() {
         const enemiesList = data.data;
 
         const details = await Promise.all(
-          enemiesList.map(async (enemy) => {
-            const res = await fetch(
-              `${apiURL2}/${enemy.slug}`
-            );
+        enemiesList.map(async (enemy) => {
+          try {
+            const res = await fetch(`${apiURL2}/${enemy.slug}`);
             const detail = await res.json();
 
             return {
               ...enemy,
-              image: detail.image,
-              description: detail.description,
-              hornetDescription: detail.hornetDescription,
+              image: detail.image || null,
+              description: detail.description || 'No description available',
+              hornetDescription: detail.hornetDescription || 'No description',
+              location: detail.stats?.location || 'Various Places',
             };
-          })
-        );
+          } catch (error) {
+            console.error(`Erro ao buscar ${enemy.slug}:`, error);
+            return {
+              ...enemy,
+              image: null,
+              description: 'Error loading data',
+              hornetDescription: 'Error loading data',
+              location: 'Various Places',
+            };
+          }
+        })
+      );
 
         localStorage.setItem("enemies", JSON.stringify(details));
         localStorage.setItem("enemies_timestamp", Date.now());
@@ -83,7 +94,6 @@ function App() {
     });
   };
 
-
  if (loading) {
     return (
      <main className='hidden lg:flex gap-8 w-svw px-12 h-dvh items-end justify-center'>
@@ -116,7 +126,7 @@ function App() {
             <ul className="mask-[linear-gradient(to_left,#0000,#000,#000,#0000)] lg:mask-[linear-gradient(to_left,#000,#000,#000,#000)] lg:overflow-x-hidden overflow-x-auto! py-12 grid lg:w-full grid-rows-2 grid-flow-col auto-cols-[100px] w-max max-w-full lg:h-full flex-row lg:overflow-y-auto overflow-y-hidden lg:max-h-[590px] max-h-[300px] whitespace-normal lg:flex px-10 flex-wrap relative mx-auto justify-center items-center gap-y-10 z-0 [&::-webkit-scrollbar]:w-0" ref={divRef}>
               {enemies.slice(1).map((enemy, key) => (
                 <li key={key} className={`lg:w-1/3 w-[2/12] min-w-[110px] lg:min-w-[unset] relative cursor-pointer hover:brightness-150 hover:saturate-150 hover:opacity-100 transition-all opacity-90`} title={enemy.name} data-active={active === enemy.slug} onClick={(e) => ativar(enemy.slug,e.target)}>
-                  <img  src={enemy.image} className='rounded-full w-20 h-20 border-3 border-white/80 block object-cover mx-auto transition-all duration-200' />
+                  <img  src={enemy.image} className='rounded-full w-20 h-20 border-3 border-white/80 block object-cover mx-auto transition-all duration-200 object-top' />
                 </li>
                 ))
               }
@@ -128,12 +138,12 @@ function App() {
           <Arrow className={'mx-auto block cursor-pointer z-50 lg:relative absolute right-0 lg:rotate-0 -rotate-90 scale-[.5_-.5] lg:scale-[1_-1]'} onClick={() =>scrollPagination('>')}/>
         </section>
   
-        <section className='max-h-120 lg:max-h-[unset] min-h-77 lg:min-h-[unset]'>
+        <section className='max-h-120 lg:max-h-[unset] min-h-77 lg:min-h-[unset] relative h-dvh'>
             {active && (() => {
               const enemy = enemies.find(e => e.slug === active);
               return (
                 <div className="place-content-center w-full mx-auto relative">
-                  <img src={enemy.image} key={enemy.slug} alt={enemy.name} className={`block mx-auto w-auto relative min-w-120 lg:min-w-66 z-10 brightness-150 saturate-[1.5] object-contain`} />
+                  <img src={enemy.image} key={enemy.slug} alt={enemy.name} className={`block mx-auto w-auto relative sm:min-w-120 max-w-100 lg:min-w-66 z-10 brightness-150 saturate-[1.5] object-contain`} />
                   <div className="blur-[5rem] rounded-full absolute z-0 w-[300px] h-[300px] left-1/2 top-1/2 [translate:-50%_-50%] saturate-[2] bg-cover bg-center bg-[#5554]"/>
                 </div>
               );
@@ -166,8 +176,13 @@ function App() {
                   </div>
               );
             })()}
+            
         </section>
       </main>
+      <a className='flex items-center gap-4 justify-center absolute bottom-8 w-full text-gray-400 text-lg' 
+        href='https://github.com/brunofranciscojs/Hunters-Journal-Silk-Song' target='_blank'>
+          <GitHubIcon width={15} height={15} fill={'#99a1af'}/>see on github
+      </a>
       <Analytics />
     </>
   )
