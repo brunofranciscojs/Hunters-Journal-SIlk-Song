@@ -58,7 +58,7 @@ section{
 }
 
 li[data-visto="false"]{
-  @apply after:content-[''] after:h-3 after:w-3 after:bg-red-400 after:blur-[1px] after:rounded-full after:absolute after:left-8 after:top-2
+  @apply after:content-[''] after:h-3 after:w-3 after:bg-red-400 after:blur-[1px] after:rounded-full after:absolute lg:after:left-8 after:left-7 after:top-2
 }
 svg{
   shape-rendering:geometricPrecision; 
