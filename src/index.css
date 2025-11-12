@@ -1,5 +1,7 @@
 @import "tailwindcss";
-
+@theme {
+  --breakpoint-lpt: 85rem;
+}
 @font-face {
   font-family: 'Perpetua';
   src: url(./assets/perpetua.woff2);
@@ -19,6 +21,8 @@
   font-family: Perpetua;
 
 }
+
+
 html{
   @apply lg:overflow-y-hidden
 }
@@ -58,7 +62,7 @@ section{
 }
 
 li[data-visto="false"]{
-  @apply after:content-[''] after:h-3 after:w-3 after:bg-red-400 after:blur-[1px] after:rounded-full after:absolute lg:after:left-8 after:left-7 after:top-2
+  @apply after:content-[''] after:h-3 after:w-3 after:bg-red-400 after:blur-[1px] after:rounded-full after:absolute after:left-0 after:top-1 after:[translate:5px_0]
 }
 svg{
   shape-rendering:geometricPrecision; 
